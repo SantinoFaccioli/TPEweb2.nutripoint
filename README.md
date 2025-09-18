@@ -6,12 +6,14 @@
 El sitio web *NutriPoint* permite a los usuarios visualizar los productos de la dietética de manera pública.  
 Los visitantes pueden explorar los productos organizados por categorías (Sin TACC, Veganos, Harinas, Lácteos, Frutos secos, etc.), ver precios, stock y descripción de cada producto.
 
-El acceso administrativo está reservado a los usuarios con rol de administrador, quienes pueden **crear, modificar o eliminar** tanto categorías como productos.  
+El acceso administrativo está reservado a los usuarios con rol de administrador, quienes pueden crear, modificar o eliminar tanto categorías como productos.  
 
 ## Modelo de datos
 A continuación se muestra el Diagrama Entidad-Relación (DER) de nuestra base de datos:
 
 ![DER de NutriPoint](DER_nutripoint.png)
+
+## El script SQL que genera la base de datos se encuentra en el archivo `db_nutripoint.sql`.
 
 El modelo de datos se compone de dos entidades principales:
 
