@@ -9,6 +9,9 @@ Los visitantes pueden explorar los productos organizados por categorías (Sin TA
 El acceso administrativo está reservado a los usuarios con rol de administrador, quienes pueden **crear, modificar o eliminar** tanto categorías como productos.  
 
 ## Modelo de datos
+A continuación se muestra el Diagrama Entidad-Relación (DER) de nuestra base de datos:
+
+![DER de NutriPoint](DER_nutripoint.png)
 
 El modelo de datos se compone de dos entidades principales:
 
