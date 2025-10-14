@@ -1,0 +1,41 @@
+header {
+    width:100%;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    align-content: flex-end;
+
+}
+header>div{
+    display:flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+header>div>h1{
+    align-content: center;
+}
+
+footer{
+    border-top: 1px solid black;
+}
+main{
+   /* width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+}
+main>div{
+    width: 35%;
+    margin-inline: 5%;
+    display: flex;
+    flex-direction: column;
+    border: 1px dashed blueviolet;
+*/
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr;
+    
+    gap: 10px;
+}
