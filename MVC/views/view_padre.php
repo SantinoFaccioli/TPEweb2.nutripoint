@@ -43,5 +43,15 @@
                         </body>
                     </html>';
         }
+
+       protected function cardProducto($nombre,$precio,$descripcion,$img){
+           echo '<div>';
+           echo '<img src='.$img. 'alt="imagen">';
+           echo '<h1>'.$nombre.'</h1>';
+           echo '<p>'.$descripcion.'</p>';
+           echo' <button>comprar</button>
+        </div>';
+        }
+
     }
     
