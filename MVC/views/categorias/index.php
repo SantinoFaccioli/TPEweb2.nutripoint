@@ -1,74 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
-    <title>Document</title>
-</head>
-<body>
-    <!-- tengo que poner el header explicito hasta que aprendamos a usar los templades
-        pq me parece que tenemos que usar algun freamword -->
-    <header>
-    <div>
-        <h1>
-            NUTRIPOINT
-        </h1>
-    </div>  
 
-    <div>
-        <ul> 
-            <?php
-                //show categorias en li que genere de maneta dinamica todas la categorias en lista 
-            ?>
-        </ul>
-    </div>
-    <div>
-        <p>inciar sesion</p> 
-        <p>registro</p>
+        <!-- Contenido principal: Listado de Productos -->
+    <div class="product-grid-container">
+        <!-- Primer Producto Rellenado -->
+        <div class="product-card">
+            <img src="<?= BASE_URL ?>/public/images/test-img.jpg" alt="Harina de Almendras" class="product-img">
+            <h2>Harina de Almendras Orgánica</h2>
+            <p class="product-category">Categoría: Harinas Sin TACC</p>
+            <p class="product-description">La mejor opción sin TACC. Ideal para repostería saludable y vegana. 250gr.</p>
+            <div class="product-footer">
+                <span class="product-price">$2.990,00</span>
+                <a href="<?= BASE_URL ?>/productos/detalle/1" class="btn-detail">Comprar</a>
+            </div>
+        </div>
+        <!-- Segundo Producto Rellenado -->
+        <div class="product-card">
+            <img src="<?= BASE_URL ?>/public/images/test-img.jpg" alt="Miel Pura de Abejas" class="product-img">
+            <h2>Miel Pura de Abejas</h2>
+            <p class="product-category">Categoría: Endulzantes Naturales</p>
+            <p class="product-description">Cosecha de Tandil. Fuente de energía natural y antioxidantes. 500gr.</p>
+            <div class="product-footer">
+                <span class="product-price">$1.850,00</span>
+                <a href="<?= BASE_URL ?>/productos/detalle/2" class="btn-detail">Comprar</a>
+            </div>
+        </div>
+        <!-- Tercer Producto Rellenado -->
+        <div class="product-card">
+            <img src="<?= BASE_URL ?>/public/images/test-img.jpg" alt="Mix de Frutos Secos Premium" class="product-img">
+            <h2>Mix de Frutos Secos Premium</h2>
+            <p class="product-category">Categoría: Frutos Secos</p>
+            <p class="product-description">Almendras, nueces, castañas de cajú y pasas. Perfecto para un snack nutritivo. 150gr.</p>
+            <div class="product-footer">
+                <span class="product-price">$3.500,00</span>
+                <a href="<?= BASE_URL ?>/productos/detalle/3" class="btn-detail">Comprar</a>
+            </div>
+        </div>
+        <!-- Cuarto Producto Rellenado -->
+        <div class="product-card">
+            <img src="<?= BASE_URL ?>/public/images/test-img.jpg" alt="Leche de Coco Vegetal" class="product-img">
+            <h2>Leche de Coco Vegetal</h2>
+            <p class="product-category">Categoría: Vegano</p>
+            <p class="product-description">Alternativa cremosa a los lácteos, sin gluten ni azúcar añadida. 1 Litro.</p>
+            <div class="product-footer">
+                <span class="product-price">$1.590,00</span>
+                <!-- <a href="<?= BASE_URL ?>/productos/detalle/4" class="btn-detail">Comprar</a>-->
+            </div>
+        </div>
+        <!-- Quinto Producto Rellenado (manteniendo tu estructura original) -->
+        <div class="product-card">
+            <img src="<?= BASE_URL ?>/public/images/test-img.jpg" alt="Avena Instantánea" class="product-img">
+            <h2>Avena Instantánea Fortificada</h2>
+            <p class="product-category">Categoría: Cereales</p>
+            <p class="product-description">Ideal para desayunos rápidos y nutritivos. Alto contenido de fibra. 500gr.</p>
+            <div class="product-footer">
+                <span class="product-price">$980,00</span>
+                <a href="<?= BASE_URL ?>/productos/detalle/5" class="btn-detail">Comprar</a>
+            </div>
+        </div>
     </div>
     
-    </header>
-    
-    <main>
-        <div>
-            <img src="../css/images/test-img.jpg" alt="imagen">
-            <h1>aca va el nombre del producto</h1>
-            <p>aca va la descripcion</p>
-            <button>comprar</button>
-        </div>
-          <div>
-            <img src="../css/images/test-img.jpg" alt="imagen">
-            <h1>aca va el nombre del producto</h1>
-            <p>aca va la descripcion</p>
-            <button>comprar</button>
-        </div>
-          <div>
-            <img src="../css/images/test-img.jpg" alt="imagen">
-            <h1>aca va el nombre del producto</h1>
-            <p>aca va la descripcion</p>
-            <button>comprar</button>
-        </div>
-          <div>
-            <img src="../css/images/test-img.jpg" alt="imagen">
-            <h1>aca va el nombre del producto</h1>
-            <p>aca va la descripcion</p>
-            <button>comprar</button>
-        </div>
-          <div>
-            <img src="../css/images/test-img.jpg" alt="imagen">
-            <h1>aca va el nombre del producto</h1>
-            <p>aca va la descripcion</p>
-            <button>comprar</button>
-        </div>
-    </main>
-
-    <footer>
-
-        <h2>
-            aca va el footer
-        </h2>
-
-    </footer>
-</body>
-</html>
