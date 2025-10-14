@@ -1,58 +1,72 @@
 <?php
-
 // RESPONSABILIDAD: Recibe peticiones del Router y decide qué Modelo usar y qué Vista mostrar.
 
-// Trae la clase View (para armar las plantillas HTML)
-require_once 'mvc/helpers/View.php';
-// Trae la clase ProductoModel (para acceder a la Base de Datos)
-require_once 'mvc/models/Producto.php'; 
-require_once 'mvc/models/Categoria.php'; // Modelo usuarioB para usar en el ABM
-
 class ProductoController {
-    private $productoModel; //es para q no se puedan modificar por el de afuera por eso priv
+    private $productoModel;
     private $view;
+    private $categoriaModel; // Lo usaremos para el ABM (el select de categorías)
 
     public function __construct() {
+        // Al iniciar, se prepara para el trabajo:
+        // Inicializa el Modelo, la herramienta para obtener datos (el almacén)
+       // $this->productoModel = new ProductoModel(); 
         
-        // Inicializa el Modelo, la herramienta para obtener datos (almacén)
-        $this->productoModel = new ProductoModel(); 
+        // Inicializa la Vista, la herramienta para armar la página HTML (view_padre)
+        // NOTA: Si la clase en el archivo se llama 'view_padre', usamos 'view_padre' aquí.
+        $this->view = new view_padre(); 
         
-       
-        $this->view = new View(); 
+        // Inicializa el Modelo de Categorías (necesario para el ABM y el menú)
+        //$this->categoriaModel = new CategoriaModels();
     }
 
     /**
-     * Muestra el listado de productos de la página principal .
+     * FUNCIÓN PRINCIPAL: index()
+     * Propósito: Muestra el listado de productos de la página principal (Acceso Público).
+     * Ruta: /productos o / (llamado por defecto)
      */
     public function index() {
-        // 1. LÓGICA: Le pide los datos al Modelo (VA A LA BASE DE DATOS)
+        // 1. LÓGICA: Pide los datos al Modelo (VA A LA BASE DE DATOS)
         $productos = $this->productoModel->obtenerTodosProductos();
+        
+        // 2. LÓGICA: También pedimos la lista de categorías (necesario para el menú del header)
+        $categorias = $this->categoriaModel->obtenerTodasCategorias();
 
-        // 2. VISTA: Ensambla la página final. Le pasa la lista ($productos) a la plantilla index.phtml.
-        $this->view->show('productos/index', [
-            'productos' => $productos 
-        ]);
+        // 3. VISTA: Ensambla la página final.
+        // Carga la parte superior de la página (<!DOCTYPE html>, <header>, <main>)
+        $this->view->header($categorias); 
+        
+        // Muestra el contenido principal (el código de mvc/views/productos/index.phtml)
+        // Le pasamos la lista de productos para que la vista los pinte.
+        require 'mvc/views/productos/index.phtml'; 
+        
+        // Carga la parte inferior de la página (</main>, <footer>, </body>, </html>)
+        $this->view->footer(); 
     }
 
     /**
-     
-     * Muestra un único producto (/productos/detalle/ID) (Requisito: Detalle de ítem).
+     * FUNCIÓN: detalle($id)
+     * Propósito: Muestra un único producto (/productos/detalle/ID) (Acceso Público).
      */
     public function detalle($id) {
-        // 1. LÓGICA: Pide un producto específico por ID
+        // 1. LÓGICA: Pide el producto específico y las categorías
         $producto = $this->productoModel->obtenerProductoPorId($id);
+        $categorias = $this->categoriaModel->obtenerTodasCategorias(); // Para el menú
 
         if ($producto) {
-            // 2. VISTA: Si lo encuentra, muestra la plantilla detalle.phtml
-            $this->view->show('productos/detalle', [
-                'producto' => $producto
-            ]);
+            // 2. VISTA: Si lo encuentra, ensambla la página
+            $this->view->header($categorias);
+            // La vista detalle.phtml se encargará de mostrar $producto
+            require 'mvc/views/productos/detalle.phtml';
+            $this->view->footer();
         } else {
-            // Maneja el error si el ID no existe (Buena práctica: 404 Not Found)
+            // Maneja el error si el ID no existe
             header("HTTP/1.0 404 Not Found");
+            $this->view->header($categorias);
             echo "<h1>Error 404: Producto no encontrado en NutriPoint.</h1>";
+            $this->view->footer();
         }
     }
     
-    // Aquí se agregarán las funciones del ABM (Rol A) para la administración.
+    // Aquí irían las funciones del ABM para la administración (Rol A): 
+    // adminProductos, agregarProducto, editarProducto, eliminarProducto.
 }
