@@ -1,5 +1,7 @@
 <?php
-// RESPONSABILIDAD: Recibe peticiones del Router y decide qué Modelo usar y qué Vista mostrar.
+    require_once __DIR__ .'/../models/ProductoModel.php';
+    require_once __DIR__ .'/../views/productosViews.php';
+
 
 class ProductoController {
     private $productoModel;
