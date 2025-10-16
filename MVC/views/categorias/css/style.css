@@ -1,16 +1,4 @@
-/*
- * Archivo: style.css (Estilos para NutriPoint)
- * TPE Web 2 - Estilos simplificados y en español.
- */
 
-/* Variables de Color: Fáciles de cambiar */
-:root {
-    --color-principal: #5A8D5F;    /* Verde para acentos */
-    --color-secundario: #E8DAB2;  /* Beige/Tierra */
-    --color-fondo-claro: #F9F9F9;
-    --color-texto-oscuro: #333333;
-    --color-borde: #E0E0E0;
-}
 
 * {
     margin: 0;
@@ -19,26 +7,29 @@
 }
 
 body {
-    font-family: Arial, sans-serif; /* Usamos una fuente simple */
-    color: var(--color-texto-oscuro);
-    background-color: var(--color-fondo-claro);
+    font-family: Arial, sans-serif;
+    color: #333333; 
+    background-color: #f7f7f7; 
+    
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* --- HEADER / CABECERA --- */
+
+/* HEADER (FLEXBOX) */
+
 
 header {
     width: 100%;
-    border-bottom: 1px solid var(--color-borde);
+    border-bottom: 1px solid #E8DAB2; 
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-content: center;
-    padding: 10px 5%; /* Padding en porcentaje para ser responsivo */
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 10px 30px;
+    background-color: #ffffff; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 header > div {
@@ -46,23 +37,21 @@ header > div {
     align-items: center;
     justify-content: center;
     padding: 5px 0;
-    width: 100%; /* Por defecto en móvil, ocupa todo */
+    width: 33.33%; 
 }
 
-/* Reglas de Desktop (más de 768px de ancho) */
-@media (min-width: 768px) {
-    header > div {
-        width: 33.33%; /* Divide el espacio en 3 columnas */
-        justify-content: center;
-    }
-    /* Alineamos los divs de inicio y fin para que no queden en el centro exacto */
-    header > div:first-child { justify-content: flex-start; }
-    header > div:last-child { justify-content: flex-end; }
+header > div:first-child { /* Ajuste del logo a la izquierda */
+    justify-content: flex-start;
 }
+header > div:last-child { /* Ajuste de login a la derecha */
+    justify-content: flex-end;
+}
+
 
 header h1 {
     font-size: 24px;
-    color: var(--color-principal);
+    color: #5A8D5F; 
+    font-weight: 700;
 }
 
 header ul {
@@ -71,45 +60,55 @@ header ul {
     gap: 15px;
 }
 
-header ul li a, header p, header a {
+header ul li a,
+header a p {
     text-decoration: none;
-    color: var(--color-texto-oscuro);
+    color: #333333; 
     font-weight: 600;
+    transition: color 0.2s;
+}
+
+header ul li a:hover,
+header a p:hover {
+    color: #5A8D5F; 
+}
+/* Estilo simple para login/registro */
+header a p { 
+    margin-left: 15px;
     cursor: pointer;
-    font-size: 14px;
+    color: #5A8D5F; 
 }
 
-header a:hover, header p:hover {
-    color: var(--color-principal);
-    opacity: 0.8;
-}
-
-/* --- MAIN / CONTENIDO PRINCIPAL --- */
+/* MAIN (GRID) */
 
 main {
     flex-grow: 1; 
     padding: 30px 5%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto; 
     width: 100%;
 }
 
 .product-grid-container {
-    /* Mantiene tu estructura de GRID */
     display: grid;
-    /* Usa la función simple repeat y minmax para responsividad */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
 }
 
 .product-card {
-    background-color: white;
-    border: 1px solid var(--color-borde);
+    background-color: #ffffff;
+    border: 1px solid #ddd; 
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .product-img {
@@ -121,14 +120,16 @@ main {
 }
 
 h2 {
-    font-size: 18px;
-    color: var(--color-principal);
+    font-size: 20px;
+    color: #5A8D5F; 
     margin-bottom: 5px;
+    font-weight: 600;
 }
 
 .product-description {
-    font-size: 14px;
-    margin-bottom: 15px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    line-height: 1.4;
     flex-grow: 1; 
 }
 
@@ -137,40 +138,62 @@ h2 {
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px dashed var(--color-borde);
 }
 
 .product-price {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
-    color: var(--color-texto-oscuro);
+    color: #333333;
 }
 
 .btn-detail {
-    background-color: var(--color-secundario);
-    color: var(--color-texto-oscuro);
+    background-color: #5A8D5F; 
+    color: #ffffff;
     padding: 8px 15px;
     text-decoration: none;
     border-radius: 5px;
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
 }
 
-/* --- FOOTER / PIE DE PÁGINA --- */
+.btn-detail:hover {
+    background-color: #4c7550;
+}
+
+/* FOOTER  */
 
 footer {
-    border-top: 1px solid var(--color-borde);
+    border-top: 1px solid #E8DAB2;
     padding: 20px;
     text-align: center;
-    background-color: white;
+    background-color: #ffffff;
     margin-top: auto;
     width: 100%;
+    font-size: 14px;
+    color: #6c757d;
 }
 
-/* --- RESPONSIVIDAD (Celulares) --- */
-@media (max-width: 767px) {
+/* RESPONSIVIDAD  */
+
+
+@media (max-width: 768px) {
     header {
         flex-direction: column;
+        padding: 10px 15px;
+    }
+
+    header > div {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+    
+    header ul {
+        flex-wrap: wrap;
+    }
+
+    .product-grid-container {
+        grid-template-columns: 1fr; 
     }
 }
+
