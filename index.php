@@ -29,6 +29,9 @@
                 $controller = new CategoriaController();
                 $controller->mostrarCategorias();
                 break;
+              case 'login':
+                echo'aca va la pagina para logear al admin';
+                break;
             default:
                 # code...
                 break;
