@@ -1,56 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
-</head>
-<body>
-    
-    <?php require_once 'config.php' ?>
-    <?php require_once 'MVC/controllers/CategoriaController.php' ?>
-    <!-- tengo que poner el header explicito hasta que aprendamos a usar los templades
-        pq me parece que tenemos que usar algun freamword -->
-    <header>
-    <div>
-        <h1>
-            NUTRIPOINT
-        </h1>
-    </div>  
+<?php 
+    require_once 'MVC/controllers/CategoriaController.php';
+    require_once 'MVC/controllers/ProductoController.php';
+    require_once 'config.php';
 
-    <div>
-        <ul> 
-            <?php
-               $mostrar = new CategoriaController();
-               $mostrar->mostrarCategorias();
-            ?>
-        </ul>
-    </div>
-    <div>
-        <p>inciar sesion</p> 
-        <p>registro</p>
-    </div>
-    
-    </header>
-    
-    <main>
-        <div>
-            <img src="../css/images/test-img.jpg" alt="imagen">
-            <h1>aca va el nombre del producto</h1>
-            <p>aca va la descripcion</p>
-            <button>comprar</button>
-        </div>
-        </a>
-          
-    </main>
+   
+            $action = $_GET['action'] ?? '';
+            if (empty($action)) {
+                $action = 'productos'; 
+            }
 
-    <footer>
+        $params = explode('/', $action);
 
-        <h2>
-            aca va el footer
-        </h2>
-
-    </footer>
-</body>
-</html>
+        switch ($params[0]) {
+            case 'productos':
+               $controller = new ProductoController;
+               $controller->verTodos();
+                break;
+            case 'productos_cat':
+                if (isset($params[1]) && is_numeric($params[1])) {
+        
+                    $cat_id = $params[1];
+                }
+                $mostraProductodById = new ProductoController;
+                
+                $mostraProductodById->mostrarProductosXCategoria($cat_id);
+                break;
+            case 'categorias':
+                $controller = new CategoriaController();
+                $controller->mostrarCategorias();
+                break;
+            default:
+                # code...
+                break;
+        }

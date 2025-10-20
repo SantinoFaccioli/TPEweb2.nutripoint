@@ -1,13 +1,13 @@
 <?php 
-    class view_padre{
+    class BaseViews{
 
-        function header ($categorias){
+        function header (){
             echo '<!DOCTYPE html>
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link rel="stylesheet" href="css/style.css">
+                <link rel="stylesheet" href="' . BASE_URL . '/css/style.css">
                 <title> - NUTRIPOINT</title>
             </head>
             <body>
@@ -18,17 +18,15 @@
                     
             // --- Menú de Categorías ---
             echo '<div>
-                <nav><ul>'; 
-                    
-            // Iteramos sobre las categorías (asumimos que son arrays asociativos)
-            foreach ($categorias as $categoria){
-                // Usamos la constante BASE_URL definida en el router
-                $url_destino = BASE_URL . '?action=productos_cat&cat_id=' . htmlspecialchars($categoria['id_categoria']);
+                <nav>
+                    <ul>
                 
-                echo '<li><a href="' . $url_destino . '">' . htmlspecialchars($categoria['nombre']) . '</a></li>';
-            }
-            
-            echo '</ul></nav>
+                        <li><a href="http://localhost/nutripoint1.0/TPEweb2.nutripoint//productos"> ver todos los productos </a></li>
+                        <li><a href="http://localhost/nutripoint1.0/TPEweb2.nutripoint/categorias"> ver categorias </a></li>
+
+                
+                    </ul>
+                </nav>
             </div>
             <div>
                 <p><a href="' . BASE_URL . '?action=login">iniciar sesion</a></p> 
@@ -40,6 +38,7 @@
 
         function footer () {
              echo '         </main>
+                            <p> aca va el footer </p>
                         </body>
                     </html>';
         }
@@ -51,6 +50,11 @@
            echo '<p>'.$descripcion.'</p>';
            echo' <button>comprar</button>
         </div>';
+        }
+
+        protected function mostrarErro($error){
+           
+            echo '<h1>'.htmlspecialchars($error).'</h1>';
         }
 
     }

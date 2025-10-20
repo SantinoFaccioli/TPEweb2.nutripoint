@@ -8,7 +8,7 @@
        }
 
        public function getAllCategorias(){
-        $query = $this->db->prepare('SELECT nombre , id FROM categoria');
+        $query = $this->db->prepare('SELECT nombre , id ,imagen_categoria FROM categoria');
         $query -> execute();
         $rta =$query->fetchAll((PDO::FETCH_ASSOC));
 
