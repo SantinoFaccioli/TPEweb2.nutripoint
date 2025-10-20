@@ -1,7 +1,7 @@
 
         <!-- Contenido principal: Listado de Productos -->
     <div class="product-grid-container">
-        <!-- Primer Producto Rellenado -->
+      
         <div class="product-card">
             <img src="<?= BASE_URL ?>/public/images/test-img.jpg" alt="Harina de Almendras" class="product-img">
             <h2>Harina de Almendras Orgánica</h2>
@@ -12,7 +12,7 @@
                 <a href="<?= BASE_URL ?>/productos/detalle/1" class="btn-detail">Comprar</a>
             </div>
         </div>
-        <!-- Segundo Producto Rellenado -->
+      
         <div class="product-card">
             <img src="<?= BASE_URL ?>/public/images/test-img.jpg" alt="Miel Pura de Abejas" class="product-img">
             <h2>Miel Pura de Abejas</h2>
@@ -23,7 +23,7 @@
                 <a href="<?= BASE_URL ?>/productos/detalle/2" class="btn-detail">Comprar</a>
             </div>
         </div>
-        <!-- Tercer Producto Rellenado -->
+        
         <div class="product-card">
             <img src="<?= BASE_URL ?>/public/images/test-img.jpg" alt="Mix de Frutos Secos Premium" class="product-img">
             <h2>Mix de Frutos Secos Premium</h2>
@@ -34,7 +34,7 @@
                 <a href="<?= BASE_URL ?>/productos/detalle/3" class="btn-detail">Comprar</a>
             </div>
         </div>
-        <!-- Cuarto Producto Rellenado -->
+       
         <div class="product-card">
             <img src="<?= BASE_URL ?>/public/images/test-img.jpg" alt="Leche de Coco Vegetal" class="product-img">
             <h2>Leche de Coco Vegetal</h2>
@@ -45,7 +45,7 @@
                 <!-- <a href="<?= BASE_URL ?>/productos/detalle/4" class="btn-detail">Comprar</a>-->
             </div>
         </div>
-        <!-- Quinto Producto Rellenado (manteniendo tu estructura original) -->
+       
         <div class="product-card">
             <img src="<?= BASE_URL ?>/public/images/test-img.jpg" alt="Avena Instantánea" class="product-img">
             <h2>Avena Instantánea Fortificada</h2>
