@@ -1,22 +1,22 @@
 <form action="admin/procesar_edicion" method="POST">
     
-    <input type="hidden" name="id_producto" value="<?php echo $producto->id_producto; ?>">
+    <input type="hidden" name="id_producto" value="<?php echo $producto['id_producto']; ?>">
 
     <div>
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($producto->nombre); ?>" required>
+        <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($producto['nombre']); ?>" required>
     </div>
     <div>
         <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" name="descripcion"><?php echo htmlspecialchars($producto->descripcion); ?></textarea>
+        <textarea id="descripcion" name="descripcion"><?php echo htmlspecialchars($producto['descripcion']); ?></textarea>
     </div>
     <div>
         <label for="precio">Precio:</label>
-        <input type="number" step="0.01" id="precio" name="precio" value="<?php echo htmlspecialchars($producto->precio); ?>" required>
+        <input type="number" step="0.01" id="precio" name="precio" value="<?php echo htmlspecialchars($producto['precio']); ?>" required>
     </div>
     <div>
         <label for="stock">Stock:</label>
-        <input type="number" id="stock" name="stock" value="<?php echo htmlspecialchars($producto->stock); ?>" required>
+        <input type="number" id="stock" name="stock" value="<?php echo htmlspecialchars($producto['stock']); ?>" required>
     </div>
     <div>
         <label for="categoria">Categoría:</label>
@@ -25,7 +25,7 @@
             <option value="">-- Elegir categoría --</option>
             
             <?php foreach ($categorias as $categoria): ?>
-                <option value="<?php echo $categoria['id']; ?>" <?php if ($categoria['id'] == $producto->id_categoria) echo 'selected'; ?>>
+                <option value="<?php echo $categoria['id']; ?>" <?php if ($categoria['id'] == $producto['id_categoria']) echo 'selected'; ?>>
                     <?php echo htmlspecialchars($categoria['nombre']); ?>
                 </option>
             <?php endforeach; ?>
