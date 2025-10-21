@@ -1,94 +1,112 @@
 <?php
-    require_once __DIR__ .'/../views/BaseViews.php';
-    require_once __DIR__ .'/../models/ProductoModel.php';
-    require_once __DIR__ .'/../views/productoViews.php';
-
-    
+require_once __DIR__ .'/../views/productoViews.php'; 
+require_once __DIR__ .'/../views/AdminViews.php'; 
+require_once __DIR__ .'/../models/ProductoModel.php';
+require_once __DIR__ .'/../models/CategoriaModels.php'; 
 
 class ProductoController {
     private $productoModel;
-    private $view;
-    private $categoriaModel; // Lo usaremos para el ABM (el select de categorías)
+    private $categoriaModel; 
+    private $view; 
+    private $adminView; 
 
     public function __construct() {
-        // Al iniciar, se prepara para el trabajo:
-        // Inicializa el Modelo, la herramienta para obtener datos (el almacén)
-            $this->productoModel = new ProductoModel(); 
-        
-        // Inicializa la Vista, la herramienta para armar la página HTML (view_padre)
-        // NOTA: Si la clase en el archivo se llama 'view_padre', usamos 'view_padre' aquí.
+        $this->productoModel = new ProductoModel(); 
+        $this->categoriaModel = new ListadoCategorias(); 
         $this->view = new productoViews(); 
-        
-        // Inicializa el Modelo de Categorías (necesario para el ABM y el menú)
-        //$this->categoriaModel = new CategoriaModels();
+        $this->adminView = new AdminViews(); 
     }
 
-    /**
-     * FUNCIÓN PRINCIPAL: index()
-     * Propósito: Muestra el listado de productos de la página principal (Acceso Público).
-     * Ruta: /productos o / (llamado por defecto)
-     */
-   /* public function index() {
-        // 1. LÓGICA: Pide los datos al Modelo (VA A LA BASE DE DATOS)
-        $productos = $this->productoModel->obtenerTodosProductos();
-        
-        // 2. LÓGICA: También pedimos la lista de categorías (necesario para el menú del header)
-        $categorias = $this->categoriaModel->obtenerTodasCategorias();
+    public function verTodos() {
+        $productos = $this->productoModel->obtenerTodosProductosConCategoria();
+        $this->view->mostrarTodosProductos($productos);
+    }
 
-        // 3. VISTA: Ensambla la página final.
-        // Carga la parte superior de la página (<!DOCTYPE html>, <header>, <main>)
-        $this->view->header($categorias); 
-        
-        // Muestra el contenido principal (el código de mvc/views/productos/index.phtml)
-        // Le pasamos la lista de productos para que la vista los pinte.
-        require 'mvc/views/productos/index.phtml'; 
-        
-        // Carga la parte inferior de la página (</main>, <footer>, </body>, </html>)
-        $this->view->footer(); 
-    }*/
-
-    /**
-     * FUNCIÓN: detalle($id)
-     * Propósito: Muestra un único producto (/productos/detalle/ID) (Acceso Público).
-     */
-  /*  public function detalle($id) {
-        // 1. LÓGICA: Pide el producto específico y las categorías
-        $producto = $this->productoModel->obtenerProductoPorId($id);
-        $categorias = $this->categoriaModel->obtenerTodasCategorias(); // Para el menú
-
+    public function detalle($id) {
+        $producto = $this->productoModel->obtenerProductoPorIdConCategoria($id);
         if ($producto) {
-            // 2. VISTA: Si lo encuentra, ensambla la página
-            $this->view->header($categorias);
-            // La vista detalle.phtml se encargará de mostrar $producto
-            require 'mvc/views/productos/detalle.phtml';
-            $this->view->footer();
+            $this->view->mostrarDetalleProducto($producto);
         } else {
-            // Maneja el error si el ID no existe
-            header("HTTP/1.0 404 Not Found");
-            $this->view->header($categorias);
-            echo "<h1>Error 404: Producto no encontrado en NutriPoint.</h1>";
-            $this->view->footer();
-        }
-    }*/
 
+            $this->view->mostrarError("Error 404: Producto no encontrado.");
+        }
+    }
     public function mostrarProductosXCategoria($cat_id){
-        
-         if (empty($cat_id) || !is_numeric($cat_id)) {
-             
-             echo('error');
+        if (empty($cat_id) || !is_numeric($cat_id)) {
+            echo('error');
+            die();
         } 
         $productos = $this->productoModel->getProductoByCatID($cat_id);
-        
-        // 3. Ordenar a la Vista que muestre los datos
         $this->view->mostrarProductosByCatID($productos); 
-        // Nota: Podrías llamar a CategoriaModel para obtener el nombre de la cat.
     }
+    public function adminListarProductos() {
+        $productos = $this->productoModel->obtenerTodosProductosConCategoria(); 
+        $categorias = $this->categoriaModel->getAllCategorias(); 
+        $this->adminView->mostrarAdminProductos($productos, $categorias); 
+    }
+   
+public function adminAgregarProducto() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
+            $nombre = $_POST['nombre'] ?? '';
+            $descripcion = $_POST['descripcion'] ?? '';
+            $precio = $_POST['precio'] ?? 0;
+            $stock = $_POST['stock'] ?? 0;
+            $id_categoria = $_POST['id_categoria'] ?? null;
 
-    function verTodos(){
-        $this->view->verTodosProductos();
+            if (empty($nombre) || empty($precio) || empty($id_categoria)) {
+                echo "Error: Faltan datos obligatorios.";
+                die();
+            }
+
+            // $imagen_url = $_POST['imagen_producto'] ?? ''; NO hay imagen en sql hay q agregar
+            $this->productoModel->insertProduct($nombre, $descripcion, $precio, $id_categoria, $stock);
+            header('Location: ' . BASE_URL . 'admin/productos');
+            
+        } else {
+            header('Location: ' . BASE_URL . 'admin/productos');
+        }
     }
     
-    
-    // Aquí irían las funciones del ABM para la administración (Rol A): 
-    // adminProductos, agregarProducto, editarProducto, eliminarProducto.
+    public function adminEliminarProducto($id) {
+        if ($id > 0) {
+            $this->productoModel->deleteProduct($id);
+        }
+
+        header('Location: ' . BASE_URL . 'admin/productos');
+    }
+    public function adminMostrarFormularioEditar($id) {
+        $producto = $this->productoModel->obtenerProductoPorIdConCategoria($id);
+        $categorias = $this->categoriaModel->getAllCategorias();
+        
+        if ($producto && $categorias) {
+            
+            $this->adminView->mostrarFormularioEditar($producto, $categorias); 
+        } else {
+            $this->adminView->mostrarError("Error: No se pudo encontrar el producto."); 
+        }
+    }
+    public function adminProcesarEdicion() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id_producto = $_POST['id_producto'] ?? 0;
+            $nombre = $_POST['nombre'] ?? '';
+            $descripcion = $_POST['descripcion'] ?? '';
+            $precio = $_POST['precio'] ?? 0;
+            $stock = $_POST['stock'] ?? 0;
+            $id_categoria = $_POST['id_categoria'] ?? null;
+
+            // 2. Validación
+            if (empty($nombre) || empty($precio) || empty($id_categoria) || $id_producto == 0) {
+                echo "Error: Faltan datos obligatorios o el ID es inválido.";
+                die();
+            }
+            $this->productoModel->updateProduct($id_producto, $nombre, $descripcion, $precio, $id_categoria, $stock);
+
+            header('Location: ' . BASE_URL . 'admin/productos');
+            
+        } else {
+            header('Location: ' . BASE_URL . 'admin/productos');
+        }
+    }
 }
+

@@ -1,0 +1,27 @@
+<h2>Nuestros Productos</h2>
+
+<?php if (empty($productos)): ?>
+    <p>No hay productos para mostrar en este momento.</p>
+<?php else: ?>
+    <div class="productos-container">
+    
+        <?php foreach ($productos as $producto): ?>
+            <div class="producto-card">
+                
+                <img src="<?php echo htmlspecialchars($producto->imagen_producto); ?>" alt="Imagen de <?php echo htmlspecialchars($producto->nombre); ?>">
+                
+                <h3><?php echo htmlspecialchars($producto->nombre); ?></h3>
+                
+                <p>
+                    <strong>Categoría:</strong> 
+                    <?php echo htmlspecialchars($producto->nombre_categoria); ?>
+                </p>
+                
+                <p><strong>Precio:</strong> $<?php echo htmlspecialchars($producto->precio); ?></p>
+                
+                <a href="detalle_producto/<?php echo $producto->id_producto; ?>">Ver Detalle</a>
+            </div>
+        <?php endforeach; ?>
+        
+    </div>
+<?php endif; ?>

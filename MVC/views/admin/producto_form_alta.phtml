@@ -1,0 +1,36 @@
+<h2>Agregar Nuevo Producto</h2>
+
+<form action="admin/agregar_producto" method="POST">
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+    </div>
+    <div>
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion"></textarea>
+    </div>
+    <div>
+        <label for="precio">Precio:</label>
+        <input type="number" step="0.01" id="precio" name="precio" required>
+    </div>
+    <div>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" value="0" required>
+    </div>
+    <div>
+        <label for="categoria">Categoría:</label>
+        
+        <select id="categoria" name="id_categoria" required>
+            <option value="">-- Elegir categoría --</option>
+            
+            <?php foreach ($categorias as $categoria): ?>
+                <option value="<?php echo $categoria['id']; ?>">
+                    <?php echo htmlspecialchars($categoria['nombre']); ?>
+                </option>
+            <?php endforeach; ?>
+            
+        </select>
+    </div>
+    
+    <button type="submit">Agregar Producto</button>
+</form>

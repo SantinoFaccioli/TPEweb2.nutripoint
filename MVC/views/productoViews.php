@@ -1,22 +1,35 @@
 <?php
-    class productoViews extends BaseViews{
+require_once __DIR__ .'/BaseViews.php';
+
+class productoViews extends BaseViews {
+    public function mostrarTodosProductos($productos) {
+        $this->header(); 
+        require 'MVC/views/public/listado_productos.phtml'; 
         
-        function mostrarProductosByCatID($productos){
-           parent::header();
-           
-            foreach($productos as $producto){
-                
-                parent::cardProducto($producto['nombre'],$producto['precio'],$producto['descripcion'],$producto['imagen_producto']);
-            }
-
-            parent::footer();
-        }
-
-        /* esto lo hago para que se vea bonito el home aca deberias hacer el ver todos los productos :) <3 */
-
-        function verTodosProductos(){
-            parent::header();
-            echo'<h1>aca van todos los productos XD</h1>';
-            parent::footer();
-        }
+        $this->footer(); 
     }
+
+   
+    public function mostrarDetalleProducto($producto) {
+        $this->header();
+        
+        
+        require 'MVC/views/public/detalle_producto.phtml';
+        
+        $this->footer();
+    }
+
+    public function mostrarProductosByCatID($productos) {
+        $this->header();
+        
+        require 'MVC/views/public/listado_productos.phtml';
+        
+        $this->footer();
+    }
+    
+    public function mostrarError($error) {
+        $this->header();
+        echo '<h1>'.htmlspecialchars($error).'</h1>';
+        $this->footer();
+    }
+}

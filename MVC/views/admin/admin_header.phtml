@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <base href="<?php echo BASE_URL; ?>"> 
+    
+    <link rel="stylesheet" href="css/style.css">
+    <title>Admin - NUTRIPOINT</title>
+</head>
+<body>
+    <header class="admin-header">
+        <div>
+            <h1>NUTRIPOINT (Panel de Admin)</h1>
+            
+            <?php if (isset($_SESSION['USERNAME'])): ?>
+                <p>Usuario: <?php echo htmlspecialchars($_SESSION['USERNAME']); ?></p>
+            <?php endif; ?>
+        </div>
+        
+        <nav class="admin-nav">
+            <ul>
+                <li><a href="admin/dashboard">Dashboard</a></li>
+                <li><a href="admin/productos">Admin. Productos</a></li>
+                <li><a href="admin/categorias">Admin. Categorías (Rol B)</a></li>
+                <li><a class="logout-link" href="logout">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>

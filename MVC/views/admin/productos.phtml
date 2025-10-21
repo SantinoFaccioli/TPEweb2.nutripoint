@@ -1,0 +1,38 @@
+<hr>
+<h2>Administrar Productos (Listado)</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if (empty($productos)): ?>
+            <tr>
+                <td colspan="5">No hay productos cargados.</td>
+            </tr>
+        <?php else: ?>
+            
+            <?php foreach ($productos as $producto): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($producto->nombre); ?></td>
+                    
+                    <td><?php echo htmlspecialchars($producto->nombre_categoria); ?></td>
+                    
+                    <td>$<?php echo htmlspecialchars($producto->precio); ?></td>
+                    <td><?php echo htmlspecialchars($producto->stock); ?></td>
+                   <td>
+                        <a href="admin/eliminar_producto/<?php echo $producto->id_producto; ?>" class="btn-eliminar">Eliminar</a>
+                        <a href="admin/editar_producto/<?php echo $producto->id_producto; ?>" class="btn-editar">Editar</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            
+        <?php endif; ?>
+    </tbody>
+</table>

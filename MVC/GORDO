@@ -1,0 +1,73 @@
+Q ONDA gordo
+
+## 1. ¿Qué implementé? (Tareas Rol A)
+
+1.  **Acceso Público :**
+    * Listado de todos los productos (`/productos`).
+    * Vista de detalle de un producto (`/detalle_producto/:id`).
+    * (Importante) Ambas vistas usan `JOIN` en el Modelo para mostrar el nombre de la categoría, como pedía el TPE.
+
+2.  **Seguridad :**
+    * Formulario de Login (`/login`).
+    * Validación de `webadmin`/`admin` (con `$_SESSION`).
+    * Protección de todas las rutas `/admin/*` (con `checkLogin()`).
+    * Botón de Logout.
+
+3.  **ABM de Productos:**
+    * Página de Admin (`/admin/productos`) que lista todo en una tabla.
+    * Formulario de **Alta** (con el `<select>` de categorías).
+    * Formulario de **Edición** (que carga los datos del producto).
+    * Toda la lógica del Controlador y Modelo para **Agregar**, **Eliminar** y **Editar** productos.
+
+---
+
+## 2. ¿Por qué tantos archivos nuevos en `/views`?
+
+ es la forma correcta de cumplir con los **Requerimientos Técnicos del TPE**:
+
+* **Requisito:** El TPE nos exige usar **Plantillas (`.phtml`)** y una **correcta "División de Responsabilidades" (MVC)**.
+* **Mala Práctica (Lo que evitamos):** Poner `echo "<html>"` o `echo "<table>"` dentro de un archivo `.php` (como `AdminViews.php`). Eso mezcla lógica y presentación, y el TPE lo penaliza.
+
+### La Estructura Correcta (Lo que hicimos):
+
+1.  **Clases de Vista (`.php`):**
+    * **Archivos:** `productoViews.php` y `AdminViews.php`.
+    * **Función:** Son "Ayudantes" o "Cerebros" de la vista. Su único trabajo es `require` el header, `require` la plantilla `.phtml` correcta y `require` el footer.
+
+2.  **Plantillas de Contenido (`.phtml`):**
+    * **Archivos:** `listado_productos.phtml`, `producto_form_alta.phtml`, `productos_tabla.phtml`, etc.
+    * **Función:** Son el **HTML puro**. Tienen los `foreach` para "dibujar" los datos que les pasa el controlador.
+
+3.  **Plantillas de Estructura (`.phtml`):**
+    * **Archivo:** `admin_header.phtml`.
+    * **Función:** Contiene el `<html>`, `<head>` y `<header>` del panel de admin. Lo separamos para no repetir código.
+
+### ¿Por qué DOS clases de Vista (`productoViews` y `AdminViews`)?
+
+Porque el **sitio público** y el **panel de admin** son dos mundos distintos:
+* **`productoViews.php`**: Maneja lo público. Carga el `header.phtml` normal (el que vos usás para las categorías).
+* **`AdminViews.php`**: Maneja lo privado. Carga el `admin_header.phtml` (con el menú de "Admin. Productos" y "Logout").
+
+---
+
+## 3. Resumen de Archivos 
+
+* `index.php`: Agregué todas las rutas para mis tareas (públicas y de admin).
+* `AdminController.php`: Creado de cero. Maneja toda la **seguridad** (`session_start`, `checkLogin`, `validar`, `logout`).
+* `ProductoController.php`: Muy modificado. Ahora tiene **dos vistas** (`$this->view` y `$this->adminView`) y toda la lógica para el **ABM** (listar, agregar, editar, etc.).
+* `ProductoModel.php`: Agregué las funciones con `JOIN` para el acceso público y corregí las funciones de ABM (`insertProduct`, `updateProduct`, `deleteProduct`).
+* `views/AdminViews.php`: Clase que maneja *todas* las vistas del admin.
+* `views/productoViews.php`: Clase que maneja *todas* las vistas públicas.
+* `views/admin/admin_header.phtml`: (Nuevo) El header/menú del panel de admin.
+* `views/admin/producto_form_alta.phtml`: (Nuevo) Formulario de Alta de producto.
+* `views/admin/producto_form_editar.phtml`: (Nuevo) Formulario de Edición de producto.
+* `views/admin/productos.phtml`: (Modificado) La tabla HTML donde se listan los productos del admin.
+* `views/public/listado_productos.phtml`: (Nuevo) La vista pública de todos los productos.
+* `views/public/detalle_producto.phtml`: (Nuevo) La vista pública del detalle.
+* `css/style.css`: Agregué los estilos para el panel de admin (tablas, formularios, botones).
+* `README.md`: Actualizado con las instrucciones de deploy y el login de admin (`webadmin`/`admin`), como pedía la consigna.
+
+Mi parte se supone q esta bien y no la probe porque me muero de sueño y si cambias el chat de gemini a modo programador mejora un monton la segunda que te hace es un poco mas lento pero va bien
+- estoy zarpada en piola
+borra esto
+si algo esta mal, perdon!! pero fue leido,entendido y borrado el 90% de comentarios asi tampoco nos regalamos 

@@ -1,0 +1,26 @@
+<div class="detalle-producto">
+    
+    <a href="productos"> &leftarrow; Volver al listado</a>
+    
+    <h2><?php echo htmlspecialchars($producto->nombre); ?></h2>
+    
+    <div class="detalle-contenido">
+        
+        <img src="<?php echo htmlspecialchars($producto->imagen_producto); ?>" alt="Imagen de <?php echo htmlspecialchars($producto->nombre); ?>">
+        
+        <div>
+            <p><strong>Descripción:</strong></p>
+            <p><?php echo htmlspecialchars($producto->descripcion); ?></p>
+            
+            <p>
+                <strong>Categoría:</strong> 
+                <?php echo htmlspecialchars($producto->nombre_categoria); ?>
+            </p>
+
+            <p><strong>Stock disponible:</strong> <?php echo htmlspecialchars($producto->stock); ?></p>
+            
+            <h3>Precio: $<?php echo htmlspecialchars($producto->precio); ?></h3>
+        </div>
+    </div>
+
+</div>

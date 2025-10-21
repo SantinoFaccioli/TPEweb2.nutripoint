@@ -1,38 +1,115 @@
 <?php 
-    require_once 'MVC/controllers/CategoriaController.php';
-    require_once 'MVC/controllers/ProductoController.php';
-    require_once 'config.php';
+require_once 'MVC/controllers/CategoriaController.php';
+require_once 'MVC/controllers/ProductoController.php';
+require_once 'MVC/controllers/AdminController.php'; 
+require_once 'config.php';
+
+$action = $_GET['action'] ?? '';
+if (empty($action)) {
+    $action = 'productos'; 
+}
+
+$params = explode('/', $action);
+
+switch ($params[0]) {
+    
+    case 'productos':
+        $controller = new ProductoController;
+        $controller->verTodos(); 
+        break;
+        
+    case 'detalle_producto': 
+        if (isset($params[1]) && is_numeric($params[1])) {
+            $id_producto = $params[1];
+            $controller = new ProductoController();
+            $controller->detalle($id_producto);
+        } else {
+            header('Location: ' . BASE_URL . 'productos');
+        }
+        break;
+
+    case 'productos_cat':
+        if (isset($params[1]) && is_numeric($params[1])) {
+            $cat_id = $params[1];
+        } else {
+            $cat_id = 0; 
+        }
+        $controller = new ProductoController; 
+        $controller->mostrarProductosXCategoria($cat_id);
+        break;
+        
+    case 'categorias':
+        $controller = new CategoriaController();
+        $controller->mostrarCategorias();
+        break;
 
    
-            $action = $_GET['action'] ?? '';
-            if (empty($action)) {
-                $action = 'productos'; 
-            }
 
-        $params = explode('/', $action);
+    case 'login':
+        $controller = new AdminController();
+        $controller->mostrarLogin(); 
+        break;
 
-        switch ($params[0]) {
-            case 'productos':
-               $controller = new ProductoController;
-               $controller->verTodos();
+    case 'validar_login':
+        $controller = new AdminController();
+        $controller->validar(); 
+        break;
+
+    case 'logout':
+        $controller = new AdminController();
+        $controller->logout();
+        break;
+
+    case 'admin':
+        $adminController = new AdminController();
+        $adminController->checkLogin(); 
+        $accionAdmin = $params[1] ?? 'dashboard'; 
+
+        switch ($accionAdmin) {
+            case 'productos': 
+                $prodController = new ProductoController();
+                $prodController->adminListarProductos(); 
                 break;
-            case 'productos_cat':
-                if (isset($params[1]) && is_numeric($params[1])) {
-        
-                    $cat_id = $params[1];
-                }
-                $mostraProductodById = new ProductoController;
+            
+            case 'agregar_producto':
+                $prodController = new ProductoController();
+                $prodController->adminAgregarProducto(); 
+                break;
+
+            case 'eliminar_producto': 
+                $id = $params[2] ?? 0;
+                $prodController = new ProductoController();
+                $prodController->adminEliminarProducto($id);
+                break;
+           case 'eliminar_producto': 
+                $id = $params[2] ?? 0;
+                $prodController = new ProductoController();
+                $prodController->adminEliminarProducto($id);
+                break;
                 
-                $mostraProductodById->mostrarProductosXCategoria($cat_id);
+            case 'editar_producto': 
+                $id = $params[2] ?? 0;
+                $prodController = new ProductoController();
+                $prodController->adminMostrarFormularioEditar($id);
                 break;
-            case 'categorias':
-                $controller = new CategoriaController();
-                $controller->mostrarCategorias();
-                break;
-              case 'login':
-                echo'aca va la pagina para logear al admin';
-                break;
+
+            case 'procesar_edicion': 
+                $prodController = new ProductoController();
+                $prodController->adminProcesarEdicion();
+               break;
+            
+           
+            case 'dashboard':
             default:
-                # code...
+                $adminController->mostrarDashboard();
                 break;
-        }
+        } 
+         break; // 'case admin:'
+    
+            default:
+            header('Location: ' . BASE_URL . 'productos');
+            break;
+        
+} 
+?>
+       
