@@ -98,7 +98,35 @@ switch ($params[0]) {
                 $prodController->adminProcesarEdicion();
                break;
             
-           
+            case 'categorias': 
+                $catController = new CategoriaController();
+                $catController->adminListarCategorias();
+               break;
+            
+            case 'eliminar_categoria': 
+                $cat_id = $params[2];
+                $catController = new CategoriaController();
+                $catController->eliminarCategoria($cat_id);
+               break; 
+            case 'agregar_categoria':
+                
+                $catController =new CategoriaController();
+              
+                $catController->agregarCategoria();
+
+                break;
+            case 'editar_categoria': 
+                
+                if (isset($params[2]) && is_numeric($params[2])) {
+                    $id = $params[2];
+                    $controller = new CategoriaController();
+                    $controller->mostrarFormularioEditar($id); 
+                } else {
+                    header('Location: ' . BASE_URL . 'admin/listar');
+                }
+            break;
+
+            
             case 'dashboard':
             default:
                 $adminController->mostrarDashboard();

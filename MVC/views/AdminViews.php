@@ -25,11 +25,11 @@ class AdminViews extends BaseViews {
     public function mostrarAdminProductos($productos, $categorias) {
         $this->adminHeader(); 
       
-        require 'MVC/views/productos.phtml';; 
+        require 'admin/productos.phtml';
         
         echo '<h2>Administrar Productos</h2>';
         
-        require 'MVC/views/admin/productos_tabla.phtml';
+        require 'MVC/views/admin/productos_tabla.phtml';  /* esto no existe XD  */
 
       $this->footer();
     }
@@ -53,5 +53,24 @@ class AdminViews extends BaseViews {
         echo '<h1>'.htmlspecialchars($error).'</h1>';
         $this->footer(); 
     }
+
+    function listarCategorias($categorias){
+        $this->adminHeader();
+        require 'MVC/views/admin/categorias.phtml';
+        $this->footer();
+    }
+    function mostrarFormAddCat(){
+        $this->adminHeader();
+        require 'MVC/views/admin/categoria_form_add.phtml';
+        $this->footer();
+    }
+
+    public function mostrarFormEditCat($categoria, $action_url) {
     
+    $this->adminHeader();
+
+    require 'MVC/views/admin/categoria_form_edit.phtml'; 
+    
+    $this->footer();
+}
 } 

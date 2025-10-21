@@ -42,7 +42,7 @@ class ProductoController {
         $this->view->mostrarProductosByCatID($productos); 
     }
     public function adminListarProductos() {
-        $productos = $this->productoModel->obtenerTodosProductosConCategoria(); 
+        $productos = $this->productoModel->obtenerTodosProductos(); 
         $categorias = $this->categoriaModel->getAllCategorias(); 
         $this->adminView->mostrarAdminProductos($productos, $categorias); 
     }

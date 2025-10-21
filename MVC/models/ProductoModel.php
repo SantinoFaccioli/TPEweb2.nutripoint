@@ -22,6 +22,7 @@ class ProductoModel{
                 p.descripcion, 
                 p.imagen_producto, 
                 p.id_producto,
+                p.stock,
                 c.nombre AS nombre_categoria,  /* Alias para el nombre de la categoría */
                 c.id                /* ID de la categoría */
             FROM productos p                   /* Alias de la tabla de productos */
@@ -29,7 +30,7 @@ class ProductoModel{
             ORDER BY p.id_producto ASC
         ');
             $query->execute();
-            return $query->fetchAll(PDO::FETCH_OBJ);
+            return $query->fetchAll(PDO::FETCH_ASSOC);
         }
 
         function getProductoByCatID($cat_id){

@@ -1,0 +1,16 @@
+<h2>Editar Categoría: <?php echo htmlspecialchars($categoria->nombre); ?></h2>
+
+<form action="<?= $action_url ?>" method="POST">
+    
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($categoria->nombre); ?>" required>
+    </div>
+    
+    <div>
+        <label for="img_url">URL de Imagen:</label>
+        <input type="text" id="img_url" name="img_url" value="<?php echo htmlspecialchars($categoria->imagen_categoria); ?>">
+    </div>
+    
+    <button type="submit">Guardar Cambios</button>
+</form>
