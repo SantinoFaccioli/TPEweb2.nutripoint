@@ -43,6 +43,17 @@ class AdminViews extends BaseViews {
 
        $this->footer();
     }
+    public function mostrarRegistro($error = null) {
+        $this->header(); 
+             require __DIR__ . '/admin/registro.phtml';
+        
+        if ($error) {
+            echo '<div><p style="color: red;">' . htmlspecialchars($error) . '</p></div>';
+        }
+        
+        $this->footer();
+    }
+
 
     private function adminHeader() {
         require 'MVC/views/admin/admin_header.phtml';

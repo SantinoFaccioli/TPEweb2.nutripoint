@@ -1,4 +1,4 @@
-<?php
+<?php 
 require_once __DIR__ .'/../views/AdminViews.php';
 
 class AdminController {
@@ -15,9 +15,18 @@ class AdminController {
             session_start();
         }
     }
+
     public function mostrarLogin() {
         $this->view->mostrarLogin();
     }
+
+    // --- MÉTODO AGREGADO PARA EL REGISTRO ---
+    public function mostrarRegistro() {
+        // Asumiendo que tienes un método 'mostrarRegistro' en tu clase AdminViews
+        $this->view->mostrarRegistro();
+    }
+    // ----------------------------------------
+    
     public function validar() {
         $usuario = $_POST['usuario'] ?? '';
         $password = $_POST['password'] ?? '';
@@ -32,16 +41,19 @@ class AdminController {
             $this->view->mostrarLogin("Usuario o contraseña incorrectos.");
         }
     }
+    
     public function logout() {
         session_destroy();
         header('Location: ' . BASE_URL . 'login');
     }
+    
     public function checkLogin() {
         if (!isset($_SESSION['IS_LOGGED']) || $_SESSION['IS_LOGGED'] !== true) {
             header('Location: ' . BASE_URL . 'login');
             die(); 
         }
     }
+    
     public function mostrarDashboard() {
         $this->view->mostrarDashboard();
     }

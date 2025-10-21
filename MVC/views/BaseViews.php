@@ -21,7 +21,7 @@
                 <nav>
                     <ul>
                 
-                        <li><a href="http://localhost/nutripoint1.0/TPEweb2.nutripoint/productos"> ver todos los productos </a></li>
+                       <li><a href="http://localhost/nutripoint1.0/TPEweb2.nutripoint/productos"> ver todos los productos </a></li>
                         <li><a href="http://localhost/nutripoint1.0/TPEweb2.nutripoint/categorias"> ver categorias </a></li>
 
                 
@@ -30,7 +30,7 @@
             </div>
             <div>
                 <p><a href="' . BASE_URL . 'login">iniciar sesion</a></p> 
-                <p><a href="' . BASE_URL . '?action=register">registro</a></p>
+                <p><a href="' . BASE_URL . 'register">registro</a></p>
             </div>
             </header>
             <main>'; // Abre la etiqueta <main>

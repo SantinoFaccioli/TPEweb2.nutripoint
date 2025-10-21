@@ -7,15 +7,6 @@ class ProductoModel{
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    // gordo::(
-    // coso me dijo esto, te lo dejo por si queres chusmearlo, capaz esta mal asi que no toque nada tuyo
-    // 1. El TPE pide que *siempre* se muestre el nombre de la categoría (Tarea 3). 
-    //    Deberías agregar un JOIN como en las funciones de Rol A.
-    // 2. Tu SELECT busca 'imagen_producto', pero el SQL ('db_nutripoint.sql') 
-    //    no tiene esa columna en la tabla 'productos'. Esto puede fallar.
-
-
-        
         function obtenerTodosProductos(){
             $query = $this->db->prepare('SELECT p.nombre, 
                 p.precio, 
@@ -38,7 +29,7 @@ class ProductoModel{
                 $query = $this->db->prepare('SELECT p.nombre, 
                 p.precio, 
                 p.descripcion, 
-                p.imagen_producto, 
+                /* p.imagen_producto, */
                 p.id_producto,
                 c.nombre AS nombre_categoria,  /* Alias para el nombre de la categoría */
                 c.id                /* ID de la categoría */
@@ -63,10 +54,10 @@ class ProductoModel{
                 $query = $this->db->prepare('SELECT p.nombre, 
                 p.precio, 
                 p.descripcion, 
-                p.imagen_producto, 
+                /* p.imagen_producto, */
                 p.id_producto,
                 p.stock,
-                c.nombre AS nombre_categoria,  /* Alias para el nombre de la categoría */
+                c.nombre AS nombre_categoria,  
                 c.id                /* ID de la categoría */
                 FROM productos p                   /* Alias de la tabla de productos */
                 JOIN categoria c ON p.id_categoria = c.id  /* Unir donde los IDs coinciden */
@@ -84,12 +75,6 @@ class ProductoModel{
             }
         }
 
-            
-        /* estos son las funciones que agregue haciendo lo de que se ve la categoria a lo que agregaste le faltan cosas pero supongo que se las vas a agregar despues 
-        si vas a usar PDO::FETCH_OBJ (el que se escribe con flechitas) usalo en todo lo mismo si vamos a usar el array assoc elegimos uno pero usamos ese solamente fijate cual te gusta  mas
-        y si agregas o sacas cosas POR FAVOR FIJATE QUE FUNCIONE NO SUBAS COSAS SIN PROBAR!!!!
-        
-        con respecto a los de las imagenes lo puse pq yo en mi db tengo imagenes en ambas tablas*/
         
    
     

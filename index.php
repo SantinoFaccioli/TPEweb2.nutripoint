@@ -12,7 +12,7 @@ if (empty($action)) {
 $params = explode('/', $action);
 
 switch ($params[0]) {
-    
+
     case 'productos':
         $controller = new ProductoController;
         $controller->verTodos(); 
@@ -43,7 +43,10 @@ switch ($params[0]) {
         $controller->mostrarCategorias();
         break;
 
-   
+    case 'register': 
+        $controller = new AdminController();
+        $controller->mostrarRegistro(); // <-- Método para mostrar la vista de registro
+        break;
 
     case 'login':
         $controller = new AdminController();
@@ -97,6 +100,7 @@ switch ($params[0]) {
                 $prodController = new ProductoController();
                 $prodController->adminProcesarEdicion();
                break;
+<<<<<<< Updated upstream
             
             case 'categorias': 
                 $catController = new CategoriaController();
@@ -127,6 +131,9 @@ switch ($params[0]) {
             break;
 
             
+=======
+    
+>>>>>>> Stashed changes
             case 'dashboard':
             default:
                 $adminController->mostrarDashboard();
