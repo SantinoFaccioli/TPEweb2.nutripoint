@@ -23,13 +23,11 @@ class ProductoController {
     }
 
     public function detalle($id) {
-        
         $producto = $this->productoModel->obtenerProductoPorId($id);
         
         if (!empty($producto)) {
             $this->view->mostrarDetalleProducto($producto);
         } else {
-
             $this->view->mostrarError("Error 404: Producto no encontrado.");
         }
     }
@@ -46,8 +44,7 @@ class ProductoController {
         $categorias = $this->categoriaModel->getAllCategorias(); 
         $this->adminView->mostrarAdminProductos($productos, $categorias); 
     }
-   
-public function adminAgregarProducto() {
+    public function adminAgregarProducto() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $nombre = $_POST['nombre'] ?? '';
@@ -77,12 +74,12 @@ public function adminAgregarProducto() {
 
         header('Location: ' . BASE_URL . 'admin/productos');
     }
-    public function adminMostrarFormularioEditar($id) {
-        $producto = $this->productoModel->obtenerProductoPorIdConCategoria($id);
+ public function adminMostrarFormularioEditar($id) {
+        $producto = $this->productoModel->obtenerProductoPorId($id);
+
         $categorias = $this->categoriaModel->getAllCategorias();
         
         if ($producto && $categorias) {
-            
             $this->adminView->mostrarFormularioEditar($producto, $categorias); 
         } else {
             $this->adminView->mostrarError("Error: No se pudo encontrar el producto."); 
