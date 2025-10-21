@@ -19,7 +19,7 @@
                 
                 <p><strong>Precio:</strong> $<?php echo htmlspecialchars($producto->precio); ?></p>
                 
-                <a href="detalle_producto/<?php echo $producto->id_producto; ?>">Ver Detalle</a>
+                <a href=<?php echo (BASE_URL . ('detalle_producto/') . $producto->id_producto); ?>>Ver Detalle</a>
             </div>
         <?php endforeach; ?>
         

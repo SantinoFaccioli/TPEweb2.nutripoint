@@ -29,7 +29,7 @@
                 </nav>
             </div>
             <div>
-                <p><a href="' . BASE_URL . '/login">iniciar sesion</a></p> 
+                <p><a href="' . BASE_URL . 'login">iniciar sesion</a></p> 
                 <p><a href="' . BASE_URL . '?action=register">registro</a></p>
             </div>
             </header>

@@ -18,13 +18,15 @@ class ProductoController {
     }
 
     public function verTodos() {
-        $productos = $this->productoModel->obtenerTodosProductosConCategoria();
+        $productos = $this->productoModel->obtenerTodosProductos();
         $this->view->mostrarTodosProductos($productos);
     }
 
     public function detalle($id) {
-        $producto = $this->productoModel->obtenerProductoPorIdConCategoria($id);
-        if ($producto) {
+        
+        $producto = $this->productoModel->obtenerProductoPorId($id);
+        
+        if (!empty($producto)) {
             $this->view->mostrarDetalleProducto($producto);
         } else {
 
