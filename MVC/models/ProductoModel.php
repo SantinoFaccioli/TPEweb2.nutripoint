@@ -21,7 +21,7 @@ class ProductoModel{
             ORDER BY p.id_producto ASC
         ');
             $query->execute();
-            return $query->fetchAll(PDO::FETCH_ASSOC);
+            return $query->fetchAll(PDO::FETCH_OBJ);
         }
 
         function getProductoByCatID($cat_id){
