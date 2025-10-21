@@ -24,8 +24,8 @@
             <option value="">-- Elegir categoría --</option>
             
             <?php foreach ($categorias as $categoria): ?>
-                <option value="<?php echo $categoria['id']; ?>">
-                    <?php echo htmlspecialchars($categoria['nombre']); ?>
+                <option value="<?php echo $categoria->id; ?>">
+                    <?php echo htmlspecialchars($categoria->nombre); ?>
                 </option>
             <?php endforeach; ?>
             
