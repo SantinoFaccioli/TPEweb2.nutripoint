@@ -20,15 +20,17 @@
             
             <?php foreach ($productos as $producto): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($producto->nombre); ?></td>
+                    <td><?php echo htmlspecialchars($producto['nombre']); ?></td>
                     
-                    <td><?php echo htmlspecialchars($producto->nombre_categoria); ?></td>
+                    <td><?php echo htmlspecialchars($producto['nombre_categoria']); ?></td>
                     
-                    <td>$<?php echo htmlspecialchars($producto->precio); ?></td>
-                    <td><?php echo htmlspecialchars($producto->stock); ?></td>
-                   <td>
-                        <a href="admin/eliminar_producto/<?php echo $producto->id_producto; ?>" class="btn-eliminar">Eliminar</a>
-                        <a href="admin/editar_producto/<?php echo $producto->id_producto; ?>" class="btn-editar">Editar</a>
+                    <td>$<?php echo htmlspecialchars($producto['precio']); ?></td>
+
+                    <td><?php echo htmlspecialchars($producto['stock']); ?></td>
+                    <td>
+                        <a href="admin/eliminar_producto/<?php echo $producto['id_producto']; ?>" class="btn-eliminar">Eliminar</a>
+                        
+                        <a href="admin/editar_producto/<?php echo $producto['id_producto']; ?>" class="btn-editar">Editar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

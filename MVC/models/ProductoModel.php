@@ -1,12 +1,21 @@
 <?php
-    class ProductoModel{
-        private $db ;
+class ProductoModel{
+    private $db ;
 
-        function __construct(){
-            
-            $this->db = new PDO( "mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=utf8", DB_USER, DB_PASS);
+    function __construct(){
+        $this->db = new PDO( "mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=utf8", DB_USER, DB_PASS);
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
 
-        }
+    // gordo::(
+    // coso me dijo esto, te lo dejo por si queres chusmearlo, capaz esta mal asi que no toque nada tuyo
+    // 1. El TPE pide que *siempre* se muestre el nombre de la categoría (Tarea 3). 
+    //    Deberías agregar un JOIN como en las funciones de Rol A.
+    // 2. Tu SELECT busca 'imagen_producto', pero el SQL ('db_nutripoint.sql') 
+    //    no tiene esa columna en la tabla 'productos'. Esto puede fallar.
+
+
+        
         function obtenerTodosProductos(){
             $query = $this->db->prepare('SELECT p.nombre, 
                 p.precio, 
@@ -75,6 +84,32 @@
         }
 
             
-
+        /* estos son las funciones que agregue haciendo lo de que se ve la categoria a lo que agregaste le faltan cosas pero supongo que se las vas a agregar despues 
+        si vas a usar PDO::FETCH_OBJ (el que se escribe con flechitas) usalo en todo lo mismo si vamos a usar el array assoc elegimos uno pero usamos ese solamente fijate cual te gusta  mas
+        y si agregas o sacas cosas POR FAVOR FIJATE QUE FUNCIONE NO SUBAS COSAS SIN PROBAR!!!!
         
+        con respecto a los de las imagenes lo puse pq yo en mi db tengo imagenes en ambas tablas*/
+        
+   
+    
+     function insertProduct($nombre, $descripcion, $precio, $id_categoria, $stock = 0) {
+        $query = $this->db->prepare("
+            INSERT INTO productos (nombre, descripcion, precio, id_categoria, stock) 
+            VALUES (?, ?, ?, ?, ?) 
+        ");
+        $query->execute([$nombre, $descripcion, $precio, $id_categoria, $stock]);
+        return $this->db->lastInsertId();
     }
+     function updateProduct($id, $nombre, $descripcion, $precio, $id_categoria, $stock) {
+        $query = $this->db->prepare("
+            UPDATE productos 
+            SET nombre = ?, descripcion = ?, precio = ?, id_categoria = ?, stock = ?
+            WHERE id_producto = ?
+        ");
+        $query->execute([$nombre, $descripcion, $precio, $id_categoria, $stock, $id]);
+    }
+     function deleteProduct($id) {
+        $query = $this->db->prepare("DELETE FROM productos WHERE id_producto = ?");
+        $query->execute([$id]);
+    }
+}

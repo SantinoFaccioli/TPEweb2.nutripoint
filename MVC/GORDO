@@ -66,6 +66,8 @@ Porque el **sitio público** y el **panel de admin** son dos mundos distintos:
 * `views/public/detalle_producto.phtml`: (Nuevo) La vista pública del detalle.
 * `css/style.css`: Agregué los estilos para el panel de admin (tablas, formularios, botones).
 * `README.md`: Actualizado con las instrucciones de deploy y el login de admin (`webadmin`/`admin`), como pedía la consigna.
+IMPORTANTE:
+nos falta el fla de la imagen en la bd nunca la agregamos y hay que resolver los templates porque son necesarios
 
 Mi parte se supone q esta bien y no la probe porque me muero de sueño y si cambias el chat de gemini a modo programador mejora un monton la segunda que te hace es un poco mas lento pero va bien
 - estoy zarpada en piola

@@ -8,16 +8,16 @@
         <?php foreach ($productos as $producto): ?>
             <div class="producto-card">
                 
-                <img src="<?php echo htmlspecialchars($producto->imagen_producto); ?>" alt="Imagen de <?php echo htmlspecialchars($producto->nombre); ?>">
+                <img src="<?php echo htmlspecialchars($producto['imagen_producto']); ?>" alt="Imagen de <?php echo htmlspecialchars($producto['nombre']); ?>">
                 
-                <h3><?php echo htmlspecialchars($producto->nombre); ?></h3>
+                <h3><?php echo htmlspecialchars($producto['nombre']); ?></h3>
                 
                 <p>
                     <strong>Categoría:</strong> 
-                    <?php echo htmlspecialchars($producto->nombre_categoria); ?>
+                    <?php echo htmlspecialchars($producto['nombre_categoria']); ?>
                 </p>
                 
-                <p><strong>Precio:</strong> $<?php echo htmlspecialchars($producto->precio); ?></p>
+                <p><strong>Precio:</strong> $<?php echo htmlspecialchars($producto['precio']); ?></p>
                 
                 <a href=<?php echo (BASE_URL . ('detalle_producto/') . $producto->id_producto); ?>>Ver Detalle</a>
             </div>
