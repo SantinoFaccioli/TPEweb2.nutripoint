@@ -100,7 +100,6 @@ switch ($params[0]) {
                 $prodController = new ProductoController();
                 $prodController->adminProcesarEdicion();
                break;
-<<<<<<< Updated upstream
             
             case 'categorias': 
                 $catController = new CategoriaController();
@@ -131,9 +130,6 @@ switch ($params[0]) {
             break;
 
             
-=======
-    
->>>>>>> Stashed changes
             case 'dashboard':
             default:
                 $adminController->mostrarDashboard();

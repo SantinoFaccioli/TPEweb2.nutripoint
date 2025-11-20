@@ -56,6 +56,7 @@ class ProductoModel{
                 p.descripcion, 
                 /* p.imagen_producto, */
                 p.id_producto,
+                p.id_categoria,
                 p.stock,
                 c.nombre AS nombre_categoria,  
                 c.id                /* ID de la categoría */

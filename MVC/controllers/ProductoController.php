@@ -63,7 +63,9 @@ class ProductoController {
             header('Location: ' . BASE_URL . 'admin/productos');
             
         } else {
-            header('Location: ' . BASE_URL . 'admin/productos');
+           $categorias = $this->categoriaModel->getAllCategorias();
+           
+            $this->adminView->mostrarFormAddProducto($categorias);
         }
     }
     
@@ -74,7 +76,7 @@ class ProductoController {
 
         header('Location: ' . BASE_URL . 'admin/productos');
     }
- public function adminMostrarFormularioEditar($id) {
+  public function adminMostrarFormularioEditar($id) {
         $producto = $this->productoModel->obtenerProductoPorId($id);
 
         $categorias = $this->categoriaModel->getAllCategorias();

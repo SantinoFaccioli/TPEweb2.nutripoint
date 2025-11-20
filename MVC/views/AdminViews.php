@@ -27,9 +27,7 @@ class AdminViews extends BaseViews {
       
         require 'admin/productos.phtml';
         
-        echo '<h2>Administrar Productos</h2>';
-        
-        require 'MVC/views/admin/productos_tabla.phtml';  /* esto no existe XD  */
+     
 
       $this->footer();
     }
@@ -83,5 +81,13 @@ class AdminViews extends BaseViews {
     require 'MVC/views/admin/categoria_form_edit.phtml'; 
     
     $this->footer();
-}
+    }
+
+    public function mostrarFormAddProducto($categorias){
+        $this->adminHeader();
+
+        require 'MVC/views/admin/producto_form_alta.phtml';
+
+        $this->footer();
+    } 
 } 

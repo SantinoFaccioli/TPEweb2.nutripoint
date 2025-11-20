@@ -21,8 +21,8 @@
                 <nav>
                     <ul>
                 
-                       <li><a href="http://localhost/nutripoint1.0/TPEweb2.nutripoint/productos"> ver todos los productos </a></li>
-                        <li><a href="http://localhost/nutripoint1.0/TPEweb2.nutripoint/categorias"> ver categorias </a></li>
+                       <li><a href="'. BASE_URL .'productos"> ver todos los productos </a></li>
+                        <li><a href="'. BASE_URL .'categorias"> ver categorias </a></li>
 
                 
                     </ul>

@@ -126,7 +126,7 @@ table tbody tr:hover {
 
 
 .btn-eliminar,
-.btn-editar {
+.btn-editar,.btn-agregar {
     text-decoration: none;
     padding: 6px 12px;
     margin: 2px;
@@ -150,4 +150,11 @@ table tbody tr:hover {
 }
 .btn-editar:hover {
     background-color: #e0a800;
+}
+.btn-agregar{
+    background-color: green; 
+    color: #333;
+}
+.btn-agregar:hover{
+     background-color:darkgreen;
 }
